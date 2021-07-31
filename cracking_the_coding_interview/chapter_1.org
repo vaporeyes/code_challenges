@@ -1,0 +1,34 @@
+:DOC-CONFIG:
+#+property: header-args:python :tangle cci_chapter1.py
+#+startup: fold
+:END:
+
+#+TITLE: Cracking the Coding Interview - Chapter 1
+#+AUTHOR: vaporeyes
+#+EMAIL: pythonicqualms@gmail.com
+
+
+1.1 - Is unique
+implement an algorithm to determine if a string has all unique
+characters
+#+begin_src python :tangle cci_chapter1.py
+def is_unique(string):
+    char_list = []
+    for char in string:
+        if char in char_list:
+            print("string does not contain all unique chars")
+            return False
+    return True
+
+
+def is_unique_with_set(string):
+    return len(set(string)) == len(string)
+#+end_src
+
+1.2 Check permutation
+given two strings, write a method to decide if one is a permutation
+of the other
+#+begin_src python :tangle cci_chapter1.py
+def is_permutation(first, second):
+    return sorted(first.replace(" ", "")) == sorted(second.replace(" ", ""))
+#+end_src
