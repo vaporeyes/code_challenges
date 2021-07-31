@@ -27,5 +27,3 @@ for p, a, b in k:
 
 print(sorted(res.items(), key=operator.itemgetter(1)))
 
-
-
