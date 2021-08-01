@@ -1,0 +1,128 @@
+;; hello world in emacs lisp
+(defun helloWorld ()
+  "Just say hello."
+  (interactive)
+  "Hello, world")
+
+;; playing around with buffers
+;; chapter 2 things
+;; 4.6 - write your own simplified end of buffer function def
+(defun simplified-end-of-buffer ()
+  "Move point to end of buffer."
+  (interactive)
+  (push-mark)
+  (goto-char (point-max)))
+
+(defun simplified-get-buffer-by-name (buffer-name)
+  "The name of the BUFFER-NAME to get."
+  (interactive "b")
+  (get-buffer buffer-name))
+
+(defun simplified-get-buffer-by-name2 (buffer-name)
+  "The name of the BUFFER-NAME to get."
+  (let ((mybuf (get-buffer buffer-name)))
+    (if (equal mybuf nil)
+        (message "Buffer doesnt exist: %s." buffer-name))))
+
+(simplified-get-buffer-by-name2 "*Messages*")
+
+(let ((thing1 'thang2)
+      (thing2 'thing2))
+  (message "things are: %s and %s." thing1 thing2))
+
+
+(let
+  (my-buffer
+    (get-buffer "*Messages*")))
+
+(let ((mybuf (get-buffer "*Messages*")))
+  (message "buffer is: %s" mybuf))
+
+(find-tag "copy-to-buffer")
+(get-buffer "*Messages*")
+
+(mapcar #'bufferp (list "*Messages*" (get-buffer "*Messages*")))
+
+(list "*Messages*" (get-buffer "*Messages*"))
+
+;; Write an interactive function with an optional argument that
+;; tests whether its argument, a number, is greater or less than
+;; the value of fill-column, and tells you which, in a message.
+;; However, if you do not pass an argument to the function, use
+;; 56 as a default value.
+
+(defun test-fill-column (&optional arg)
+  "Testing 'fill-column' with optional ARG."
+  (if arg
+      (if (> arg fill-column)
+          (message "arg: %d is greater than fill-column %d" arg fill-column)
+        (message "arg: %d is less than fill-column %d" arg fill-column))
+    (let ((arg 56)) (message "arg is %d" arg))))
+(test-fill-column)
+
+(defun what-line ()
+  "Print the current line number at point."
+  (interactive)
+  (save-restriction
+    (widen)
+    (save-excursion
+      (beginning-of-line)
+      (message "Line %d"
+               (1+ (count-lines 1 (point)))))))
+
+;; 6.3 exercise with narrowing
+;; display first 60 chars of current buffer
+(defun display-first-60-of-buffer ()
+  "Print the first 60 lines of the current buffer."
+  (interactive)
+  (save-restriction
+    (widen)
+    (save-excursion
+      (goto-char (point-min))
+      (let
+          ((buf-contents (buffer-substring (point-min) 60)))
+        (message "buf contents: %s" buf-contents)))))
+
+;; Construct a list of four birds by evaluating several expressions with cons.
+;; Find out what happens when you cons a list onto itself. Replace the first
+;; element of the list of four birds with a fish. Replace the rest of that
+;; list with a list of other fish.
+(setq my-bird-list (list 'hawk 'falcon 'osprey 'pigeon))
+(setq my-bird-list-cons (list 'hawk))
+
+(cons (cons (cons 'falcon)
+                  'osprey)
+                  my-bird-list-cons)
+
+(car '(rose violet daisy buttercup))
+
+;; other random functions
+(defun jd/count-words-buffer ()
+  "Count words in current buffer."
+  (let ((count 0))
+    (save-excursion
+      (goto-char (point-min))
+      (while (< (point) (point-max))
+        (forward-word 1)
+        (setq count (1+ count)))
+      (message "buffer contains %d words" count))))
+
+(defun jd/count-lines-buffer ()
+  "Count lines in current buffer."
+  (let ((count 0))
+    (save-excursion
+      (goto-char (point-min))
+      (while (< (point) (point-max))
+        (forward-line 1)
+        (setq count (1+ count)))
+      (message "buffer contains %d lines" count))))
+
+(defun jd/count-chars-buffer ()
+  "Count lines in current buffer."
+  (let ((count 0))
+    (save-excursion
+      (goto-char (point-min))
+      (while (< (point) (point-max))
+        (forward-char 1)
+        (setq count (1+ count)))
+      (message "buffer contains %d chars" count))))
