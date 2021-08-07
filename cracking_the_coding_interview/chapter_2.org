@@ -1,0 +1,10 @@
+:DOC-CONFIG:
+#+property: header-args:python :tangle cci_chapter1.py
+#+startup: fold
+:END:
+
+#+TITLE: Cracking the Coding Interview - Chapter 2
+#+AUTHOR: vaporeyes
+#+EMAIL: pythonicqualms@gmail.com
+
+2.1 Remove Dupes

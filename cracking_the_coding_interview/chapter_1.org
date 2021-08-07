@@ -110,5 +110,15 @@ def compress(string):
 given an image represented by an NxN matrix, where each pixel in the image
 is 4 bytes, write a method to rotate the image by 90 degrees
 #+begin_src python :tangle cci_chapter1.py
+# transpose and reverse method
+def rotate_matrix(matrix: list) -> list:
+    transposed = map(list, zip(*matrix))
+    return [x[::-1] for x in transposed]
+#+end_src
+
+1.8 zero matrix
+write an algorithm such that if an element MxN matrix is 0, its entire row and
+column are set to 0
+#+begin_src python :tangle cci_chapter1.py
 
 #+end_src
