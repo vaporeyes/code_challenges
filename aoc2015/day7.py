@@ -26,3 +26,4 @@ def day7_first_start():
     with open("day7_input_test") as f:
         data = [x.strip() for x in f.readlines()]
         for i in data:
+            ... # derp
